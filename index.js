@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var constants = require('./constants/constants.js');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -18,6 +19,15 @@ app.use('/api/token', token);
 
 var user = require('./routes/user/user.js');
 app.use('/api/user', user);
+
+// END ROUTES FOR API
+// =============================================================================
+
+// DB SETUP
+// =============================================================================
+var mongoose = require('mongoose');
+mongoose.connect(constants.dbConnection);
+// =============================================================================
 
 app.use(express.static(__dirname + '/public'));
 
