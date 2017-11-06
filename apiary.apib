@@ -1,0 +1,39 @@
+FORMAT: 1A
+HOST: http://devapi.a3lan.com
+
+# A3lan
+
+A3lan is a API allowing consumers of the A3lan mobile apps to interact with the services.
+
+## API Token [/token]
+
+### Generate Token [POST]
+
+You must generate a token for any session before interacting with the API. If you have an existing token you'll be able to continue the session using that.
+
++ Request (application/json)
+
+        {
+            "grant_type": "password",
+            "username": "username",
+            "password": "password"
+        }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "access_token": "GUID",
+                "token_type": "bearer",
+                "expires_in": 86399 //24 Hours,
+                "url": "http://devapi.a3lan.com"
+            }
+            
+## Sign Up [/user/signup]
+
+### Sign Up [POST]
+
+## Login [/user/login]
+
+### Login [GET]
