@@ -9,18 +9,15 @@ app.use(bodyParser.json());
 
 app.set('port', (process.env.PORT || 5000));
 
-// MODELS LIVE HERE
-var Bear = require('./models/bear');
-
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
-router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
-});
+var token = require('./routes/token/token.js');
+app.use('/api/token', token);
 
-app.use('/api', router);
+var user = require('./routes/user/user.js');
+app.use('/api/user', user);
 
 app.use(express.static(__dirname + '/public'));
 
