@@ -15,30 +15,10 @@ var Bear = require('./models/bear');
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
-// test route to make sure everything is working (accessed at GET http://localhost:5000/api)
+
 router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
-
-// on routes that end in /bears
-// ----------------------------------------------------
-router.route('/bears')
-
-    // create a bear (accessed at POST http://localhost:5000/api/bears)
-    .post(function(req, res) {
-        
-    })
-
-    // get all the bears (accessed at GET http://localhost:5000/api/bears)
-    .get(function(req, res) {
-        Bear.find(function(err, bears) {
-            if (err)
-                res.send(err);
-
-            res.json(bears);
-        });
-    });
-
 
 app.use('/api', router);
 
