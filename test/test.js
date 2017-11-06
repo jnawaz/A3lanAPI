@@ -1,4 +1,3 @@
-require('./test1.js');
 require('./database.js');
 
 var assert = require('assert');
