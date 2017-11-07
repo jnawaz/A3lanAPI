@@ -20,6 +20,9 @@ app.use('/api/token', token);
 var user = require('./routes/user/user.js');
 app.use('/api/user', user);
 
+var mosque = require('./routes/mosque/mosque.js');
+app.use('/api/mosque', mosque);
+
 // END ROUTES FOR API
 // =============================================================================
 
