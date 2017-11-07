@@ -28,8 +28,7 @@ app.use('/api/mosque', mosque);
 
 // DB SETUP
 // =============================================================================
-var mongoose = require('mongoose');
-mongoose.connect(constants.dbConnection);
+
 // =============================================================================
 
 app.use(express.static(__dirname + '/public'));
