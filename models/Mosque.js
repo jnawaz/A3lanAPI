@@ -9,6 +9,6 @@ var MosqueSchema = new Schema({
     postcode: String
 });
 
-var Mosque = mongoose.model('Mosque', MosqueSchema);
+var Mosque = mongoose.model('mosque', MosqueSchema, 'mosque');
 
 module.exports = Mosque;
