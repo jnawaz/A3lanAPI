@@ -14,7 +14,8 @@
     "ejs": "2.5.6",
     "express": "4.15.2",
     "passport": "*",
-    "passport-http-bearer": "*"
+    "passport-http-bearer": "*",
+    "guid": "*"
   },
   "devDependencies": {
     "request": "^2.81.0",
