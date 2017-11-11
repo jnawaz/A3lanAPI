@@ -10,8 +10,7 @@ router.get('/', function (req, res) {
 
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function () {
-        // console.log("DB Connection Alive");
-
+        
         try {
             Mosque.find({}, function (err, mosques) {
                 if (err) {
