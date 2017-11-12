@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var guid = require('Guid');
+var guid = require('guid');
 
 var A3Mongo = require('./../../mongoose/A3Mongoose');
 var User = require('./../../models/User');
