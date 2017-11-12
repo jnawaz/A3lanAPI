@@ -37,36 +37,37 @@ router.post('/', function (req, res) {
                                     expiresIn: 85399 // expires in 24 hours
                                 });
 
-                                A3Mongo.closeConnection();
-
                                 // return the information including token as JSON
                                 res.status(201).json({
                                     success: true,
                                     token: token,
                                     expiresIn: 85399 // Seconds
                                 });
-                                
-                            } else {
+
                                 A3Mongo.closeConnection();
+                            } else {
                                 res.status(400).json({
                                     'message': 'Authentication Failed',
                                     'success': 'true'
                                 });
+                                A3Mongo.closeConnection();
                             }
                         } else {
-                            A3Mongo.closeConnection();
+                            
                             res.status(204).json({
                                 'message': 'User does not exist',
                                 'success': false
                             });
+                            A3Mongo.closeConnection();
                         }
                     });
                 } catch (error) {
-                    A3Mongo.closeConnection();
+                
                     res.status(400).json({
                         'message': 'Authentication Failed',
                         'success': false
                     });
+                    A3Mongo.closeConnection();
                 }
 
 
