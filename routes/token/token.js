@@ -2,6 +2,7 @@ var constants = require('./../../constants/constants');
 var A3Mongo = require('./../../mongoose/A3Mongoose');
 var User = require('./../../models/User');
 
+
 var express = require('express');
 var router = express.Router();
 
@@ -21,7 +22,6 @@ router.post('/', function (req, res) {
             db.on('error', console.error.bind(console, 'connection error:'));
             db.once('open', function () {
                 try {
-                    // var query = Person.findOne({ 'name.last': 'Ghost' });
                     User.findOne({ 'username': username }, function (err, user) {
                         if (err) throw err;
 
@@ -82,5 +82,7 @@ router.post('/', function (req, res) {
         });
     }
 });
+
+
 
 module.exports = router;

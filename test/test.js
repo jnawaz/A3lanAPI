@@ -1,1 +1,1 @@
-require('./tokenTests.js');
+require('./Token Tests/tokenTests.js');
