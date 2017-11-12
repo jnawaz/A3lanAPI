@@ -1,6 +1,7 @@
 var constants = require('./../../constants/constants');
 var A3Mongo = require('./../../mongoose/A3Mongoose');
 var User = require('./../../models/User');
+var jwt = require('jsonwebtoken');
 
 
 var express = require('express');
@@ -33,14 +34,14 @@ router.post('/', function (req, res) {
                                 };
 
                                 var token = jwt.sign(payload, constants.jwtSecret, {
-                                    expiresInMinutes: 1440 // expires in 24 hours
+                                    expiresIn: 85399 // expires in 24 hours
                                 });
 
                                 // return the information including token as JSON
                                 res.status(201).json({
                                     success: true,
                                     token: token,
-                                    expiresIn: (expiresInMinutes * 60) - 1 // Seconds
+                                    expiresIn: 85399 // Seconds
                                 });
                             } else {
                                 res.status(400).json({
@@ -48,13 +49,13 @@ router.post('/', function (req, res) {
                                     'success': 'true'
                                 });
                             }
+                        } else {
+                            A3Mongo.prototype.closeConnection();
+                            res.status(204).json({
+                                'message': 'User does not exist',
+                                'success': false
+                            });
                         }
-
-                        A3Mongo.prototype.closeConnection();
-                        res.status(204).json({
-                            'message': 'User does not exist',
-                            'success': false
-                        });
                     });
                 } catch (error) {
                     A3Mongo.prototype.closeConnection();
