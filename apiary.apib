@@ -14,20 +14,25 @@ You must generate a token for any session before interacting with the API. If yo
 + Request (application/json)
 
         {
-            "grant_type": "password",
-            "username": "username",
-            "password": "password"
+            "grant_type": "password"
         }
+        
+    + Body 
+    
+            {
+                "username": "username",
+                "password": "password"
+            }    
 
 + Response 200 (application/json)
 
     + Body
 
             {
-                "access_token": "GUID",
+                "token": "GUID",
                 "token_type": "bearer",
                 "expires_in": 86399 //24 Hours,
-                "url": "http://devapi.a3lan.com"
+                "url": "http://devapi.a3lan.co.uk"
             }
             
 ## Sign Up [/user/signup]
