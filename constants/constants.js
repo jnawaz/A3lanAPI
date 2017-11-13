@@ -8,7 +8,10 @@ let Constants = {
     // dbConnection: "mongodb://a3lan_sndbox:Amreen16105@ds249005.mlab.com:49005/heroku_q6njk7dt"
 
     // JWT Secret
-    jwtSecret: "aMfIsgFuUz"
+    jwtSecret: "aMfIsgFuUz",
+
+    // 24 Hours - 1 second
+    tokenExpiryTime: 85399
 
 };
 

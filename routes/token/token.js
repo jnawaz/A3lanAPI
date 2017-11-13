@@ -34,14 +34,14 @@ router.post('/', function (req, res) {
                                 };
 
                                 var token = jwt.sign(payload, constants.jwtSecret, {
-                                    expiresIn: 85399 // expires in 24 hours
+                                    expiresIn: constants.tokenExpiryTime // 24 hour expiry
                                 });
 
                                 // return the information including token as JSON
                                 res.status(201).json({
                                     success: true,
                                     token: token,
-                                    expiresIn: 85399 // Seconds
+                                    expiresIn: constants.tokenExpiryTime
                                 });
 
                                 A3Mongo.closeConnection();
