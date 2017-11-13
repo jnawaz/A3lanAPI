@@ -2,6 +2,7 @@ var constants = require('./../../constants/constants');
 var A3Mongo = require('./../../mongoose/A3Mongoose');
 var User = require('./../../models/User');
 var jwt = require('jsonwebtoken');
+var apiResponse = require('./../../API Messages/ResponseMessages');
 
 
 var express = require('express');
@@ -47,7 +48,8 @@ router.post('/', function (req, res) {
                                 A3Mongo.closeConnection();
                             } else {
                                 res.status(400).json({
-                                    'message': 'Authentication Failed',
+                                    'message': apiResponse.TO001,
+                        'code': 'TO001',
                                     'success': 'true'
                                 });
                                 A3Mongo.closeConnection();
@@ -64,7 +66,8 @@ router.post('/', function (req, res) {
                 } catch (error) {
                 
                     res.status(400).json({
-                        'message': 'Authentication Failed',
+                        'message': apiResponse.TO001,
+                        'code': 'TO001',
                         'success': false
                     });
                     A3Mongo.closeConnection();
@@ -76,14 +79,16 @@ router.post('/', function (req, res) {
         } else {
             // Failed authentication (username or password issue)
             res.status(401).json({
-                'message': 'Authentication Failed.',
+                'message': apiResponse.TO001,
+                        'code': 'TO001',
                 'success': false
             });
         }
 
     } else {
         res.status(400).json({
-            'message': 'Authentication Failed.',
+            'message': apiResponse.TO001,
+                        'code': 'TO001',
             'success': false
         });
     }
