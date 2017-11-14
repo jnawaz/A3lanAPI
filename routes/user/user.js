@@ -11,6 +11,12 @@ router.get('/', function (req, res) {
     res.send("Access user here");
 });
 
+// UPDATE USER DETAILS
+// =============================================================================
+router.put('/', function (req, res) {
+    res.send("Access user here");
+});
+
 // USER SIGN UP (NO Token Required)
 // =============================================================================
 router.post('/signup', function (req, res) {
@@ -47,7 +53,7 @@ router.post('/signup', function (req, res) {
 });
 
 router.post('/login', function (req, res) { 
-    
+
 });
 
 module.exports = router;
