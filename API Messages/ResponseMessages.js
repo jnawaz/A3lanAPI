@@ -15,8 +15,8 @@ var APIResponses = {
 
     // MOSQUE
     // =============================================================================
-    'MO001': 'Unable to retrieve Mosques',
-    'MO002': 'There was an error retrieving Mosques'
+    'MO001': 'Unable to retrieve Mosques.',
+    'MO002': 'There was an error retrieving Mosques.'
 }
 
 module.exports = Object.freeze(APIResponses);
