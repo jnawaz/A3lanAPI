@@ -46,4 +46,8 @@ router.post('/signup', function (req, res) {
     })
 });
 
+router.post('/login', function (req, res) { 
+    
+});
+
 module.exports = router;

@@ -3,6 +3,7 @@ var router = express.Router();
 
 var A3Mongo = require('./../../mongoose/A3Mongoose');
 var Mosque = require('./../../models/Mosque');
+var apiResponse = require('./../../API Messages/ResponseMessages');
 
 router.get('/', function (req, res) {
 
@@ -14,14 +15,28 @@ router.get('/', function (req, res) {
         try {
             Mosque.find({}, function (err, mosques) {
                 if (err) {
-                    res.send(err);
+                    // res.send(err);
+                    res.status(400).json({
+                        success: false,
+                        error: err,
+                        code: 'MO002',
+                        message: apiResponse.MO002
+                    });
                     A3Mongo.prototype.closeConnection();
                 }
                 if (mosques.length > 0) {
-                    res.json(mosques);
+
+                    res.status(200).json({
+                        mosques: mosques,
+                        success: true
+                    });
                     A3Mongo.prototype.closeConnection();
                 } else {
-                    res.send("None found");
+                    res.status(204).json({
+                        success: false,
+                        mosques: [],
+                        code: 204
+                    });
                     A3Mongo.prototype.closeConnection();
                 }
             });
@@ -30,6 +45,12 @@ router.get('/', function (req, res) {
         }
 
     });
+
+});
+
+// Mosque By Id
+// =============================================================================
+router.get('/mosqueById', function (req, res) {
 
 });
 
