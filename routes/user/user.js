@@ -52,8 +52,10 @@ router.post('/signup', function (req, res) {
     })
 });
 
+// USER LOGIN
+// =============================================================================
 router.post('/login', function (req, res) { 
-
+    
 });
 
 module.exports = router;
