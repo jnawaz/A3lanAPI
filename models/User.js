@@ -13,6 +13,8 @@ var UserSchema = new Schema({
 
 var User = mongoose.model('user', UserSchema, 'user');
 
-module.exports = {
-    User
+function isValid() {
+    console.log("ooooo");
 }
+
+module.exports = User
