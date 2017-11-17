@@ -49,6 +49,7 @@ router.post('/signup', userMiddleware.authentication, function (req, res) {
             db.once('open', function () {
                 try {
                     var newUser = new User();
+                    // newUser.isValid();
                     newUser.isValid();
                     newUser.id = guid.create();
                     newUser.firstname = userDetails.firstname;
@@ -58,14 +59,16 @@ router.post('/signup', userMiddleware.authentication, function (req, res) {
                     newUser.followingMosques = []; // Not following any mosques at this point
                     newUser.save(function (err) {
                         if (err) {
+                            //TODO: handle error here.
                             res.send(err);
                             A3Mongo.prototype.closeConnection();
+                        } else {
+                            res.status(201).json({
+                                success: true,
+                                message: 'User Created!'
+                            });
+                            A3Mongo.prototype.closeConnection();
                         }
-                        res.status(201).json({
-                            success: true,
-                            message: 'User Created!'
-                        });
-                        A3Mongo.prototype.closeConnection();
                     });
                 } catch (err) {
                     A3Mongo.prototype.closeConnection();

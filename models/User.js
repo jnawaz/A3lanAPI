@@ -11,10 +11,16 @@ var UserSchema = new Schema({
     followingMosques: [] // Array of Mosque Ids
 });
 
+UserSchema.methods.isValid = function() {
+    console.log("yoooo");
+};
+
 var User = mongoose.model('user', UserSchema, 'user');
 
-function isValid() {
-    console.log("ooooo");
-}
+// User.methods.isValid = function isValid() {
+//     console.log("hey!");
+// }
 
-module.exports = User
+
+
+module.exports = User;
