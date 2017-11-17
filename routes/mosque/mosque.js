@@ -5,6 +5,8 @@ var A3Mongo = require('./../../mongoose/A3Mongoose');
 var Mosque = require('./../../models/Mosque');
 var apiResponse = require('./../../API Messages/ResponseMessages');
 
+// GET ALL MOSQUES
+// =============================================================================
 router.get('/', function (req, res) {
 
     var db = A3Mongo.prototype.getConnection();
@@ -25,7 +27,6 @@ router.get('/', function (req, res) {
                     A3Mongo.prototype.closeConnection();
                 }
                 if (mosques.length > 0) {
-
                     res.status(200).json({
                         mosques: mosques,
                         success: true
@@ -41,14 +42,19 @@ router.get('/', function (req, res) {
                 }
             });
         } catch (e) {
-
+            res.status(400).json({
+                success: false,
+                error: e.message,
+                code: 'MO003',
+                message: apiResponse.MO003
+            });
         }
 
     });
 
 });
 
-// Mosque By Id
+// GET MOSQUE BY ID
 // =============================================================================
 router.get('/mosqueById', function (req, res) {
 
