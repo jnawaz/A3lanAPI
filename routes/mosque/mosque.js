@@ -60,4 +60,16 @@ router.get('/mosqueById', function (req, res) {
 
 });
 
+// FOLLOW MOSQUE
+// =============================================================================
+router.post('/followMosque', function (req, res) {
+
+});
+
+// EDIT MOSQUE DETAILS
+// =============================================================================
+router.put('/edit', function (req, res) {
+
+});
+
 module.exports = router;
