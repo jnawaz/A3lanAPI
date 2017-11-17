@@ -31,7 +31,11 @@ router.post('/', function (req, res) {
                             // Authenticate then issue token
                             if (user.password == password) {
                                 const payload = {
-                                    user: user.username
+                                    username: user.username,
+                                    userId: user.id,
+                                    userEmail: user.email,
+                                    userFirstname: user.firstname, 
+                                    userLastname: user.lastname
                                 };
 
                                 var token = jwt.sign(payload, constants.jwtSecret, {
