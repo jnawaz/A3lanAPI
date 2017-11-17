@@ -12,12 +12,18 @@ var APIResponses = {
 
     // GENERAL
     // =============================================================================
+    'GO001': 'User authentication failed, your token may be invalid, please sign in again.',
+    'GO002': 'No token provided.',
 
     // MOSQUE
     // =============================================================================
     'MO001': 'Unable to retrieve Mosques.',
     'MO002': 'There was an error retrieving Mosques.',
-    'MO003': 'Unexpected error, please try again.\n If the problem persists please contact support.'
+    'MO003': 'Unexpected error, please try again.\n If the problem persists please contact support.',
+
+    // USER
+    // =============================================================================
+    'US001': 'User details missing'
 }
 
 module.exports = Object.freeze(APIResponses);
