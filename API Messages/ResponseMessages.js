@@ -23,7 +23,8 @@ var APIResponses = {
 
     // USER
     // =============================================================================
-    'US001': 'User details missing'
+    'US001': 'User details missing',
+    'US002': 'Email and Password missing.'
 }
 
 module.exports = Object.freeze(APIResponses);
