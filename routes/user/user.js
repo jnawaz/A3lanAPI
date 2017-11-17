@@ -2,10 +2,8 @@ var express = require('express');
 var router = express.Router();
 var guid = require('guid');
 var apiResponse = require('./../../API Messages/ResponseMessages');
-
 var A3Mongo = require('./../../mongoose/A3Mongoose');
 var User = require('./../../models/User');
-
 var userMiddleware = require('./../../middleware/userMiddleware');
 
 // GET USER DETAILS

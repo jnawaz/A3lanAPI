@@ -4,7 +4,6 @@ var jwt = require('jsonwebtoken');
 var constants = require('./../constants/constants');
 var apiResponse = require('./../API Messages/ResponseMessages');
 
-
 module.exports = {
     authentication: function (req, res, next) {
         var token = req.headers['bearer'];
