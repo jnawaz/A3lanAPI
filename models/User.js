@@ -8,7 +8,9 @@ var UserSchema = new Schema({
     username: String,
     email: String,
     password: String,
-    followingMosques: [] // Array of Mosque Ids
+    followingMosques: [], // Array of Mosque Ids
+    loginCounter: Int,
+    loginLockedOutDate: Date
 });
 
 UserSchema.methods.isValid = function() {
