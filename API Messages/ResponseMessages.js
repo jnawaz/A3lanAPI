@@ -23,8 +23,9 @@ var APIResponses = {
 
     // USER
     // =============================================================================
-    'US001': 'User details missing',
-    'US002': 'Email and Password missing.'
+    'US001': 'User details missing.',
+    'US002': 'Email and Password missing.',
+    'US003': 'User locked out. \nPlease wait 15 minutes and try again.'
 }
 
 module.exports = Object.freeze(APIResponses);

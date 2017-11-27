@@ -82,7 +82,18 @@ router.post('/signup', userMiddleware.authentication, function (req, res) {
 // USER LOGIN
 // =============================================================================
 router.post('/login', userMiddleware.authentication, function (req, res) {
-    //TODO: Implement login
+    
+    var user = req.decoded;
+
+    // Check Login Counter
+    if (user.userLoginCounter >= 3) {
+        res.status(401).json({
+            success: false,
+            code: 'US003',
+            message: apiResponse.US003 
+        });
+    }
+    
 });
 
 module.exports = router;

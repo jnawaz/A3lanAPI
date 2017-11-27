@@ -9,7 +9,7 @@ var UserSchema = new Schema({
     email: String,
     password: String,
     followingMosques: [], // Array of Mosque Ids
-    loginCounter: Int,
+    loginCounter: Number,
     loginLockedOutDate: Date
 });
 

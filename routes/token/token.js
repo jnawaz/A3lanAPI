@@ -34,8 +34,10 @@ router.post('/', function (req, res) {
                                     username: user.username,
                                     userId: user.id,
                                     userEmail: user.email,
-                                    userFirstname: user.firstname, 
-                                    userLastname: user.lastname
+                                    userFirstname: user.firstname,
+                                    userLastname: user.lastname,
+                                    userLoginCounter: user.loginCounter,
+                                    userLockedOutDate: user.loginLockedOutDate
                                 };
 
                                 var token = jwt.sign(payload, constants.jwtSecret, {
@@ -49,32 +51,32 @@ router.post('/', function (req, res) {
                                     expiresIn: constants.tokenExpiryTime
                                 });
 
-                                A3Mongo.closeConnection();
+                                A3Mongo.prototype.closeConnection();
                             } else {
                                 res.status(400).json({
                                     'message': apiResponse.TO001,
-                        'code': 'TO001',
+                                    'code': 'TO001',
                                     'success': 'true'
                                 });
-                                A3Mongo.closeConnection();
+                                A3Mongo.prototype.closeConnection();
                             }
                         } else {
-                            
+
                             res.status(204).json({
                                 'message': 'User does not exist',
                                 'success': false
                             });
-                            A3Mongo.closeConnection();
+                            A3Mongo.prototype.closeConnection();
                         }
                     });
                 } catch (error) {
-                
+
                     res.status(400).json({
                         'message': apiResponse.TO001,
                         'code': 'TO001',
                         'success': false
                     });
-                    A3Mongo.closeConnection();
+                    A3Mongo.prototype.closeConnection();
                 }
 
 
@@ -84,7 +86,7 @@ router.post('/', function (req, res) {
             // Failed authentication (username or password issue)
             res.status(401).json({
                 'message': apiResponse.TO001,
-                        'code': 'TO001',
+                'code': 'TO001',
                 'success': false
             });
         }
@@ -92,7 +94,7 @@ router.post('/', function (req, res) {
     } else {
         res.status(400).json({
             'message': apiResponse.TO001,
-                        'code': 'TO001',
+            'code': 'TO001',
             'success': false
         });
     }
