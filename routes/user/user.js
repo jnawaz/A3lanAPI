@@ -8,8 +8,33 @@ var userMiddleware = require('./../../middleware/userMiddleware');
 
 // GET USER DETAILS
 // =============================================================================
-router.get('/', function (req, res) {
-    res.send("Access user here");
+router.get('/', userMiddleware.authentication, function (req, res) {
+    var db = A3Mongo.prototype.getConnection();
+
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', function () {
+
+        try {
+            User.find({"id": "12b07609-ffae-d58d-216d-7db5c5fb697d"}, function (err, user) {
+                if (err) {
+                    res.status(400).json({
+                        success: false, 
+                        error: err,
+                        code: 'US004',
+                        message: apiResponse.US004
+                    });
+                    A3Mongo.prototype.closeConnection();
+                } else {
+
+                    A3Mongo.prototype.closeConnection();
+                }
+            });
+        } catch (e) {
+
+            A3Mongo.prototype.closeConnection();
+        }
+
+    });
 });
 
 // UPDATE USER DETAILS
@@ -81,7 +106,7 @@ router.post('/signup', userMiddleware.authentication, function (req, res) {
 // USER LOGIN
 // =============================================================================
 router.post('/login', userMiddleware.authentication, function (req, res) {
-    
+
     var user = req.decoded;
 
     // Check Login Counter
@@ -89,15 +114,15 @@ router.post('/login', userMiddleware.authentication, function (req, res) {
         res.status(401).json({
             success: false,
             code: 'US003',
-            message: apiResponse.US003 
+            message: apiResponse.US003
         });
     } else {
         res.status(200).json({
-            success: true, 
+            success: true,
             user: req.decoded
         });
     }
-    
+
 });
 
 module.exports = router;
