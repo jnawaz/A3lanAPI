@@ -75,7 +75,6 @@ router.post('/signup', userMiddleware.authentication, function (req, res) {
                 }
             });
         }
-
     }
 });
 
@@ -91,6 +90,11 @@ router.post('/login', userMiddleware.authentication, function (req, res) {
             success: false,
             code: 'US003',
             message: apiResponse.US003 
+        });
+    } else {
+        res.status(200).json({
+            success: true, 
+            user: req.decoded
         });
     }
     
