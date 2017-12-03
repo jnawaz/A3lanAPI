@@ -78,7 +78,9 @@ router.get('/mosqueById', authMiddleware.authentication, function (req, res) {
                 }
             });
         } catch (e) {
-
+            res.json(400).json({
+                
+            });
         }
     });
 });

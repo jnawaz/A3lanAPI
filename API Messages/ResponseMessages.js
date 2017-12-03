@@ -21,6 +21,7 @@ var APIResponses = {
     'MO002': 'There was an error retrieving Mosques.',
     'MO003': 'Unexpected error, please try again.\nIf the problem persists please contact support.',
     'MO004': 'There was an error retrieving the mosque.',
+    'MO005': 'Unexpected error, please try again.\nIf the problem persists please contact support.',
 
     // USER
     // =============================================================================
@@ -33,7 +34,7 @@ var APIResponses = {
     'US007': 'A3lan encountered a problem saving your sign up details. Please contact support.',
     'US008': 'Unable to update user details.\nPlease provide user details.',
     'US009': 'An unexpected error occurred when trying to update user details.\nPlease try again later, if the problem perisists contact support.',
-    'US010': ''
+    'US010': 'A problem was encountered whilst updating the user details.\nPlease try again later, if the problem perisists please contact support.'
 }
 
 module.exports = Object.freeze(APIResponses);
