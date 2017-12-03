@@ -29,7 +29,10 @@ var APIResponses = {
     'US004': 'Unable to retrieve user details.',
     'US005': 'Unexpected error, please try again.\nIf the problem persists please contact support.',
     'US006': 'Sign up encountered a problem, please try again.\nIf the problem persists please contact support.',
-    'US007': 'A3lan encountered a problem saving your sign up details. Please contact support.'
+    'US007': 'A3lan encountered a problem saving your sign up details. Please contact support.',
+    'US008': 'Unable to update user details.\nPlease provide user details.',
+    'US009': 'An unexpected error occurred when trying to update user details.\nPlease try again later, if the problem perisists contact support.',
+    'US010': ''
 }
 
 module.exports = Object.freeze(APIResponses);

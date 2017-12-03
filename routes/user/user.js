@@ -50,36 +50,55 @@ router.get('/', userMiddleware.authentication, function (req, res) {
 router.put('/', userMiddleware.authentication, function (req, res) {
 
     var user = req.decoded;
+    var updatedUser = req.body.user;
     var db = A3Mongo.prototype.getConnection();
 
-    db.on('error', console.error.bind(console, 'connection error:'));
-    db.once('open', function () {
-        try {
+    if (updatedUser == null) {
+        res.status(403).json({
+            success: false,
+            code: 'US008',
+            message: apiResponse.US008
+        });
+    } else {
+        db.on('error', console.error.bind(console, 'connection error:'));
+        db.once('open', function () {
+            try {
 
-            // db.restaurant.updateOne(
-            //    { "name" : "Central Perk Cafe" },
-            //    { $set: { "violations" : 3 } }
-            // );
-            User.updateOne({
-                "id": user.userId
-            },
-                {
-                    $set: {
+                User.update({"id": user.userId},
+                    {
+                        $set: {
+                            firstname: updatedUser.firstname,
+                            lastname: updatedUser.lastname,
+                            email: updatedUser.email
+                        }
+                    }, { new: false }, function (err, tank) {
+                        if (err) {
+                            res.status(400).json({
+                                success: false,
+                                code: 'US010',
+                                error: err,
+                                message: apiResponse.US010
+                            });
+                            A3Mongo.prototype.closeConnection();
+                        } else {
+                            res.status(200).json({
+                                message: "User successfully updated"
+                            });
+                            A3Mongo.prototype.closeConnection();
+                        }
+                    });
 
-                    }
-                },
-                {
-                    "upsert": false
+            } catch (e) {
+                res.status().json({
+                    success: false,
+                    error: e,
+                    message: apiResponse.US009,
+                    code: 'US009'
                 });
-
-            res.status(200).json({
-                message: "User successfully updated"
-            });
-
-        } catch (e) {
-
-        }
-    });
+                A3Mongo.prototype.closeConnection();
+            }
+        });
+    }
 });
 
 // USER SIGN UP (NO Token Required)
