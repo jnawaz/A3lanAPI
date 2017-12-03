@@ -17,7 +17,6 @@ router.get('/', function (req, res) {
         try {
             Mosque.find({}, function (err, mosques) {
                 if (err) {
-                    // res.send(err);
                     res.status(400).json({
                         success: false,
                         error: err,

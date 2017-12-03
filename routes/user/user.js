@@ -4,11 +4,11 @@ var guid = require('guid');
 var apiResponse = require('./../../API Messages/ResponseMessages');
 var A3Mongo = require('./../../mongoose/A3Mongoose');
 var User = require('./../../models/User');
-var userMiddleware = require('./../../middleware/userMiddleware');
+var authMiddleware = require('./../../middleware/authMiddleware');
 
 // GET USER DETAILS
 // =============================================================================
-router.get('/', userMiddleware.authentication, function (req, res) {
+router.get('/', authMiddleware.authentication, function (req, res) {
     var db = A3Mongo.prototype.getConnection();
 
     db.on('error', console.error.bind(console, 'connection error:'));
@@ -47,7 +47,7 @@ router.get('/', userMiddleware.authentication, function (req, res) {
 
 // UPDATE USER DETAILS
 // =============================================================================
-router.put('/', userMiddleware.authentication, function (req, res) {
+router.put('/', authMiddleware.authentication, function (req, res) {
 
     var user = req.decoded;
     var updatedUser = req.body.user;
@@ -103,7 +103,7 @@ router.put('/', userMiddleware.authentication, function (req, res) {
 
 // USER SIGN UP (NO Token Required)
 // =============================================================================
-router.post('/signup', userMiddleware.authentication, function (req, res) {
+router.post('/signup', authMiddleware.authentication, function (req, res) {
 
     var body = req.body;
     var userDetails = body.user;
@@ -172,7 +172,7 @@ router.post('/signup', userMiddleware.authentication, function (req, res) {
 
 // USER LOGIN
 // =============================================================================
-router.post('/login', userMiddleware.authentication, function (req, res) {
+router.post('/login', authMiddleware.authentication, function (req, res) {
 
     var user = req.decoded;
 
