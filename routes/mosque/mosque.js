@@ -3,6 +3,7 @@ var router = express.Router();
 
 var A3Mongo = require('./../../mongoose/A3Mongoose');
 var Mosque = require('./../../models/Mosque');
+var User = require('./../../models/User');
 var apiResponse = require('./../../API Messages/ResponseMessages');
 var authMiddleware = require('./../../middleware/authMiddleware');
 
@@ -91,6 +92,53 @@ router.get('/mosqueById', authMiddleware.authentication, function (req, res) {
 // =============================================================================
 router.post('/followMosque', authMiddleware.authentication, function (req, res) {
 
+    var userId = req.decoded.userId;
+    var mosqueId = req.body.mosque.mosqueId;
+
+    if (mosqueId != null) {
+        res.status(400).json({
+            code: 'MO006',
+            message: apiResponse.MO006,
+            success: false
+        });
+    } else {
+        var db = A3Mongo.prototype.getConnection();
+        db.on('error', console.error.bind(console, 'connection error:'));
+        db.on('open', function () {
+            try {
+                User.update({"id": user.userId},
+                {
+                    $push: {
+                        followingMosques: mosqueId
+                    }
+                }, { new: false }, function (err, tank) {
+                    if (err) {
+                        res.status(400).json({
+                            success: false,
+                            code: 'MO007',
+                            error: err,
+                            message: apiResponse.MO007
+                        });
+                        A3Mongo.prototype.closeConnection();
+                    } else {
+                        res.status(200).json({
+                            message: "You successfully followed the mosque."
+                        });
+                        A3Mongo.prototype.closeConnection();
+                    }
+                });
+            } catch (e) {
+                res.status(400).json({
+                    error: e,
+                    success: false, 
+                    code: 'MO008',
+                    message: apiResponse.MO008
+                });
+            }
+        });
+    }
+
+    
 });
 
 // EDIT MOSQUE DETAILS

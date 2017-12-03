@@ -63,7 +63,6 @@ router.put('/', authMiddleware.authentication, function (req, res) {
         db.on('error', console.error.bind(console, 'connection error:'));
         db.once('open', function () {
             try {
-
                 User.update({"id": user.userId},
                     {
                         $set: {
