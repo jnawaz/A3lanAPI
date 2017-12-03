@@ -79,7 +79,9 @@ router.get('/mosqueById', authMiddleware.authentication, function (req, res) {
             });
         } catch (e) {
             res.json(400).json({
-                
+                success: false, 
+                message: apiResponse.MO005,
+                code: 'MO005'
             });
         }
     });
