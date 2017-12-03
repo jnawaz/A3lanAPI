@@ -20,6 +20,7 @@ var APIResponses = {
     'MO001': 'Unable to retrieve Mosques.',
     'MO002': 'There was an error retrieving Mosques.',
     'MO003': 'Unexpected error, please try again.\nIf the problem persists please contact support.',
+    'MO004': 'There was an error retrieving the mosque.',
 
     // USER
     // =============================================================================
