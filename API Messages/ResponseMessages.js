@@ -27,7 +27,9 @@ var APIResponses = {
     'US002': 'Email and Password missing.',
     'US003': 'User locked out. \nPlease wait 15 minutes and try again.',
     'US004': 'Unable to retrieve user details.',
-    'US005': 'Unexpected error, please try again.\nIf the problem persists please contact support.'
+    'US005': 'Unexpected error, please try again.\nIf the problem persists please contact support.',
+    'US006': 'Sign up encountered a problem, please try again.\nIf the problem persists please contact support.',
+    'US007': 'A3lan encountered a problem saving your sign up details. Please contact support.'
 }
 
 module.exports = Object.freeze(APIResponses);

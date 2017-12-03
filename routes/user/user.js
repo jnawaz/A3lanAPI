@@ -15,22 +15,30 @@ router.get('/', userMiddleware.authentication, function (req, res) {
     db.once('open', function () {
 
         try {
-            User.find({"id": "12b07609-ffae-d58d-216d-7db5c5fb697d"}, function (err, user) {
+            User.find({ "id": req.decoded.userId }, function (err, user) {
                 if (err) {
                     res.status(400).json({
-                        success: false, 
+                        success: false,
                         error: err,
                         code: 'US004',
                         message: apiResponse.US004
                     });
                     A3Mongo.prototype.closeConnection();
                 } else {
-
+                    res.status(200).json({
+                        user: user,
+                        success: true
+                    });
                     A3Mongo.prototype.closeConnection();
                 }
             });
         } catch (e) {
-
+            res.status(400).json({
+                success: false,
+                err: e,
+                code: 'US005',
+                message: apiResponse.US005
+            });
             A3Mongo.prototype.closeConnection();
         }
 
@@ -40,7 +48,38 @@ router.get('/', userMiddleware.authentication, function (req, res) {
 // UPDATE USER DETAILS
 // =============================================================================
 router.put('/', userMiddleware.authentication, function (req, res) {
-    res.send("Access user here");
+
+    var user = req.decoded;
+    var db = A3Mongo.prototype.getConnection();
+
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', function () {
+        try {
+
+            // db.restaurant.updateOne(
+            //    { "name" : "Central Perk Cafe" },
+            //    { $set: { "violations" : 3 } }
+            // );
+            User.updateOne({
+                "id": user.userId
+            },
+                {
+                    $set: {
+
+                    }
+                },
+                {
+                    "upsert": false
+                });
+
+            res.status(200).json({
+                message: "User successfully updated"
+            });
+
+        } catch (e) {
+
+        }
+    });
 });
 
 // USER SIGN UP (NO Token Required)
@@ -74,7 +113,6 @@ router.post('/signup', userMiddleware.authentication, function (req, res) {
             db.once('open', function () {
                 try {
                     var newUser = new User();
-                    // newUser.isValid();
                     newUser.isValid();
                     newUser.id = guid.create();
                     newUser.firstname = userDetails.firstname;
@@ -84,8 +122,12 @@ router.post('/signup', userMiddleware.authentication, function (req, res) {
                     newUser.followingMosques = []; // Not following any mosques at this point
                     newUser.save(function (err) {
                         if (err) {
-                            //TODO: handle error here.
-                            res.send(err);
+                            res.status(400).json({
+                                error: err,
+                                success: false,
+                                code: 'US007',
+                                message: apiResponse.US007
+                            });
                             A3Mongo.prototype.closeConnection();
                         } else {
                             res.status(201).json({
@@ -96,6 +138,12 @@ router.post('/signup', userMiddleware.authentication, function (req, res) {
                         }
                     });
                 } catch (err) {
+                    res.status(400).json({
+                        success: false,
+                        error: err,
+                        message: apiResponse.US006,
+                        code: 'US006'
+                    });
                     A3Mongo.prototype.closeConnection();
                 }
             });
