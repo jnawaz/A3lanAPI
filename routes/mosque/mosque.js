@@ -95,7 +95,7 @@ router.post('/followMosque', authMiddleware.authentication, function (req, res) 
     var userId = req.decoded.userId;
     var mosqueId = req.body.mosque.mosqueId;
 
-    if (mosqueId != null) {
+    if (mosqueId == null) {
         res.status(400).json({
             code: 'MO006',
             message: apiResponse.MO006,
@@ -106,7 +106,7 @@ router.post('/followMosque', authMiddleware.authentication, function (req, res) 
         db.on('error', console.error.bind(console, 'connection error:'));
         db.on('open', function () {
             try {
-                User.update({"id": user.userId},
+                User.update({"id": userId},
                 {
                     $push: {
                         followingMosques: mosqueId
@@ -134,6 +134,7 @@ router.post('/followMosque', authMiddleware.authentication, function (req, res) 
                     code: 'MO008',
                     message: apiResponse.MO008
                 });
+                A3Mongo.prototype.closeConnection();
             }
         });
     }
