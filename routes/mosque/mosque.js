@@ -63,7 +63,9 @@ router.get('/mosqueById', authMiddleware.authentication, function (req, res) {
     db.on('error', console.error.bind(console, 'connection error:'));
     db.on('open', function () {
         try {
-            Mosque.find({ "mosqueId": req.query.mosqueId }, function (err, mosque) {
+            Mosque.find({
+                "mosqueId": req.query.mosqueId
+            }, function (err, mosque) {
                 if (err) {
                     res.status(400).json({
                         success: false,
@@ -106,12 +108,15 @@ router.post('/followMosque', authMiddleware.authentication, function (req, res) 
         db.on('error', console.error.bind(console, 'connection error:'));
         db.on('open', function () {
             try {
-                User.update({"id": userId},
-                {
+                User.update({
+                    "id": userId
+                }, {
                     $push: {
                         followingMosques: mosqueId
                     }
-                }, { new: false }, function (err, tank) {
+                }, {
+                    new: false
+                }, function (err, user) {
                     if (err) {
                         res.status(400).json({
                             success: false,
@@ -122,7 +127,8 @@ router.post('/followMosque', authMiddleware.authentication, function (req, res) 
                         A3Mongo.prototype.closeConnection();
                     } else {
                         res.status(200).json({
-                            message: "You successfully followed the mosque."
+                            message: "You successfully followed the mosque.",
+                            updatedUser: user
                         });
                         A3Mongo.prototype.closeConnection();
                     }
@@ -130,7 +136,7 @@ router.post('/followMosque', authMiddleware.authentication, function (req, res) 
             } catch (e) {
                 res.status(400).json({
                     error: e,
-                    success: false, 
+                    success: false,
                     code: 'MO008',
                     message: apiResponse.MO008
                 });
@@ -138,8 +144,6 @@ router.post('/followMosque', authMiddleware.authentication, function (req, res) 
             }
         });
     }
-
-    
 });
 
 // EDIT MOSQUE DETAILS
