@@ -70,7 +70,7 @@ router.put('/', authMiddleware.authentication, function (req, res) {
                             lastname: updatedUser.lastname,
                             email: updatedUser.email
                         }
-                    }, { new: false }, function (err, tank) {
+                    }, { new: false }, function (err, user) {
                         if (err) {
                             res.status(400).json({
                                 success: false,
@@ -81,7 +81,8 @@ router.put('/', authMiddleware.authentication, function (req, res) {
                             A3Mongo.prototype.closeConnection();
                         } else {
                             res.status(200).json({
-                                message: "User successfully updated"
+                                message: "User successfully updated",
+                                updatedUser: user
                             });
                             A3Mongo.prototype.closeConnection();
                         }
