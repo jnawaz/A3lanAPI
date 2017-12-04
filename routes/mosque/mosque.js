@@ -149,7 +149,56 @@ router.post('/followMosque', authMiddleware.authentication, function (req, res) 
 // EDIT MOSQUE DETAILS
 // =============================================================================
 router.put('/update', function (req, res) {
+    var user = req.decoded;
+    var updatedMosque = req.body.mosque;
+    var db = A3Mongo.prototype.getConnection();
 
+    if (updatedMosque == null) {
+        res.status(403).json({
+            success: false,
+            code: 'MO009',
+            message: apiResponse.MO009
+        });
+    } else {
+        db.on('error', console.error.bind(console, 'connection error:'));
+        db.once('open', function () {
+            try {
+                Mosque.update({
+                    "mosqueId": updatedMosque.mosqueId
+                }, {
+                    $set: {
+                        "address1": updatedMosque.address1,
+                        "address2": updatedMosque.address2,
+                        "towncity": updatedMosque.postcode,
+                        "postcode": updatedMosque.postcode
+                    }
+                }, {
+                    new: false
+                }, function (err, mosque) {
+                    if (err) {
+                        res.status(400).json({
+                            success: false,
+                            code: 'MO010',
+                            message: apiResponse.MO010
+                        });
+                        A3Mongo.prototype.closeConnection();
+                    } else {
+                        res.status(200).json({
+                            message: 'Mosque successfully updated.'
+                        });
+                        A3Mongo.prototype.closeConnection();
+                    }
+                })
+            } catch (e) {
+                res.json(400).json({
+                    success: false,
+                    code: 'MO011',
+                    message: apiResonse.MO011,
+                    error: e
+                });
+            }
+        });
+    }
 });
 
 module.exports = router;

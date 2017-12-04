@@ -26,6 +26,8 @@ var APIResponses = {
     'MO007': 'A problem was encountered whilst trying to follow this mosque.\nPlease try again later, if the problem persists please contact support',
     'MO008': 'An unexpected error occurred whilst trying to follow this mosque.\n Please try again later, if the problem persists please contact support.',
     'MO009': 'Unable to update Mosque, please provide Mosque Details',
+    'MO010': 'A problem was encountered whilst trying to update this mosques details.\nPlease try again later, if the problem persists, please contact support.',
+    'MO011': 'An unexpected error occurred whilst trying to update this mosques details.\nPlease try again later, if the problem persists, please contact support.',
 
     // USER
     // =============================================================================
