@@ -24,6 +24,9 @@ app.use('/api/user', user);
 var mosque = require('./routes/mosque/mosque.js');
 app.use('/api/mosque', mosque);
 
+var a3lan = require('./routes/a3lans/a3lans.js');
+app.use('/api/a3lan', a3lan);
+
 // END ROUTES FOR API
 // =============================================================================
 
