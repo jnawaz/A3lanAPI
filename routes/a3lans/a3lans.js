@@ -10,5 +10,5 @@ var authMiddleware = require('./../../middleware/authMiddleware');
 // GET ALL MOSQUE A3LANS
 // =============================================================================
 router.get('/', authMiddleware.authentication, function (req, res) {
-
+    
 });
